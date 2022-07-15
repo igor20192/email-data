@@ -1,0 +1,11 @@
+Invalid emails (10):
+	wyman.com
+	ynolanjones.com
+	nernserhickle.biz
+	brad84gmail.com
+	yahoo.com
+	.com
+	com
+	com
+	com
+	@hegmann.info
