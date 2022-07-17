@@ -70,7 +70,27 @@ Use commands
 
     python emailoperations.py --group-by-domain
 
-    python emailoperations.py --gbd
+    python emailoperations.py -gbd
+
+### 4. Find emails that are not in the log file
+
+Use commands
+
+    python emailoperations.py --find-emails-not-in-logs 'path_to_logs_file'
+
+    python emailoperations.py -feil 'path_to_logs_file'
+
+Replace path_to_logs_file with the path to the logs file.For example /home/name/bc387adcbde0d0bacbd547dba57ca857/email-sent.logs
+
+
+
+
+
+    
+
+
+
+
 
 
 
