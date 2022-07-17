@@ -31,3 +31,23 @@ Clone the repository
 To create a virtual environment and install dependencies into it, run the following command:
 
     pipenv sync --dev
+
+If you don't need dev dependencies
+
+    pipenv sync
+
+To "enter" inside the virtual environment, you need to run:
+
+    pipenv shell
+
+## Script Functions
+
+### 1. Show wrong emails
+
+Use commands
+
+    python emailoperations.py --incorrect-emails
+
+or
+
+    python emailoperations.py -ic
