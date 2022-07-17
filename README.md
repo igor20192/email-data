@@ -21,3 +21,11 @@ Now let's check the installation:
     pipenv, version 2018.11.26
 
 If you get a similar output, then everything is in order.
+
+Clone the repository
+
+    git clone https://github.com/igor20192/bc387adcbde0d0bacbd547dba57ca857.git
+
+    cd bc387adcbde0d0bacbd547dba57ca857
+
+To create a virtual environment and install dependencies into it, run the following command:
