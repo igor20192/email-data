@@ -29,3 +29,5 @@ Clone the repository
     cd bc387adcbde0d0bacbd547dba57ca857
 
 To create a virtual environment and install dependencies into it, run the following command:
+
+    pipenv sync --dev
