@@ -228,7 +228,7 @@ class EmailDate:
 a = EmailDate()
 if __name__ == "__main__":
     fire.Fire(
-        {
+        {  # Dictionary With commands to run the application
             "--incorrect-emails": a.add_dir_emails,
             "-ic": a.add_dir_emails,
             "--search": a.get_email_text,
