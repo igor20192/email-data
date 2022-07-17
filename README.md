@@ -51,3 +51,36 @@ Use commands
 or
 
     python emailoperations.py -ic
+
+### 2. Search for letters by text
+
+Use commands
+
+    python emailoperations.py --search str
+
+    python emailoperations.py -s str
+
+String argument instead of str
+
+### 3. Group emails by domain
+
+Group emails by one domain and arrange domains and emails alphabetically.
+
+Use commands
+
+    python emailoperations.py --group-by-domain
+
+    python emailoperations.py --gbd
+
+
+
+     
+
+
+
+    
+
+
+
+
+
