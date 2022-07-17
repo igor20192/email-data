@@ -1,3 +1,5 @@
+### igor.udovenko2015@gmail.com
+
 # Script to work with email data
 
 ## Mounting
@@ -72,7 +74,7 @@ Use commands
 
     python emailoperations.py -gbd
 
-### 4. Find emails that are not in the log file
+### 4. Find emails that are not in the log file 
 
 Use commands
 
