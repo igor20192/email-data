@@ -178,7 +178,7 @@ class EmailDate:
             [print(f"\t{eml}") for eml in sorted(result)]
         except Exception:
             print(
-                "For detailed information on this command, run: python emailoperations.py -s --help"
+                "For detailed information on this command, run: python emailoperations.py -feil --help"
             )
 
 
