@@ -201,7 +201,7 @@ class EmailDate:
         try:
             # We compare sets and get the necessary e-mail
             result = self.all_emails().difference(
-                self.email_sent_log(path_to_logs_file)
+                self.email_sent_log(str(path_to_logs_file))
             )
 
             # Displaying the number of e-mails
