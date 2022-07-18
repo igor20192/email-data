@@ -12,18 +12,7 @@ class EmailDate:
     # Function to detect invalid email
     def email_not_valid(self, data):
         for email in data:
-
-            if (
-                not re.findall("@", email)
-                or len(re.findall("@", email)) > 1
-                or len(email[: email.find("@")]) < 1
-                or len(email[email.find("@") + 1 : email.rfind(".")]) < 1
-                or len(email[email.rfind(".") + 1 :]) < 1
-                or len(email[email.rfind(".") + 1 :]) > 5
-                or not email[email.rfind(".") + 1 :].rstrip().isalpha()
-                and not email[email.rfind(".") + 1 :].rstrip().isnumeric()
-            ):
-                # Adding invalid emails to the list
+            if not self.email_valid(email.rstrip()):
                 self.email_list.append(email.rstrip())
 
     # Function for displaying invalid emails
