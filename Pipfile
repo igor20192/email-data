@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 fire = "*"
 click = "*"
+pytest = "*"
 
 [dev-packages]
 black = "*"
