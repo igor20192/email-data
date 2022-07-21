@@ -5,7 +5,7 @@ import csv
 import pathlib
 
 
-class EmailDate:
+class EmailOperations:
     def __init__(self):
         self.email_list = []
 
@@ -18,24 +18,8 @@ class EmailDate:
     # Function for displaying invalid emails
     def add_dir_emails(self):
         self.email_list.clear()  # Clearing the list before use
-        lst = []  # List for getting files from file with CSV extension
-        # Get all files from emails directory
-        for filename in os.listdir("emails"):
-            # Define the extension
-            if (pathlib.Path(filename).suffix) == ".txt":
-                # We determine the wrong e-mail from files with the txt extension
-                with open(f"emails/{filename}", "r") as f:
-                    flext = f
-                    self.email_not_valid(flext)
 
-            # We determine the wrong e-mail from files with the csv extension
-            else:
-                with open(f"emails/{filename}", "r") as fb:
-                    reader = csv.DictReader(fb, delimiter=";")
-                    for row in reader:
-                        lst.append(row["email"])
-
-                    self.email_not_valid(lst)
+        self.email_not_valid(self.open_file())
 
         # Displaying the number of invalid emails
         print(f"Invalid emails ({len(self.email_list)}):")
@@ -45,28 +29,12 @@ class EmailDate:
     # Function for searching letters by text
     def get_email_text(self, ltr):
         self.email_list.clear()  # Clearing the list before use
-        lst = []  # List for getting files from file with CSV extension
         try:
-            # Get all files from emails directory
-            for filename in os.listdir("emails"):
-                # Define the extension
-                if (pathlib.Path(filename).suffix) == ".txt":
-                    with open(f"emails/{filename}", "r") as f:
-                        for email in f:
-                            # Add found e-mail and check for validity(txt)
-                            if re.findall(ltr, email) and self.email_valid(email):
-                                self.email_list.append(email.rstrip())
 
-                # We determine the wrong e-mail from files with the csv extension
-                else:
-                    with open(f"emails/{filename}", "r") as fb:
-                        reader = csv.DictReader(fb, delimiter=";")
-                        for row in reader:
-                            lst.append(row["email"])
-                        for eml in lst:
-                            # Add found e-mail and check for validity(csv)
-                            if re.findall(ltr, eml) and self.email_valid(eml):
-                                self.email_list.append(eml.rstrip())
+            for email in self.open_file():
+                # Add found e-mail and check for validity(txt)
+                if re.findall(ltr, email) and self.email_valid(email):
+                    self.email_list.append(email.rstrip())
 
             # Displaying the number of found emails
             print(f"Found emails with '{ltr}' in email ({len(set(self.email_list))}):")
@@ -100,56 +68,24 @@ class EmailDate:
     def get_domain_email(self):
         self.email_list.clear()  # Clearing the list before use
         # Get all files from emails directory
-        for filename in os.listdir("emails"):
-            # Define the extension
-            if pathlib.Path(filename).suffix == ".txt":
-                with open(f"emails/{filename}", "r") as f:
-                    for email in f:
-                        if self.email_valid(email):
-                            # Adding all domains
-                            self.email_list.append(
-                                email[email.find("@") + 1 :].rstrip()
-                            )
-
-            else:
-                # For files with csv extension
-                with open(f"emails/{filename}", "r") as fb:
-                    reader = csv.DictReader(fb, delimiter=";")
-                    for row in reader:
-                        eml = row["email"]
-                        if self.email_valid(eml):
-                            # Adding domains from CSV files
-                            self.email_list.append(eml[eml.find("@") + 1 :].rstrip())
+        for email in self.open_file():
+            if self.email_valid(email):
+                # Adding all domains
+                self.email_list.append(email[email.find("@") + 1 :].rstrip())
 
         self.group_domain()
 
     # Functiongroups emails by one domain and arranges domains
     def group_domain(self):
         domain_st = set()  # Plenty to add domains and remove duplicates
-        for domain in sorted(set(self.email_list)):  # Domain sorting
-            # Get all files from emails directory
-            for filename in os.listdir("emails"):
-                # Define the extension
-                if pathlib.Path(filename).suffix == ".txt":
-                    with open(f"emails/{filename}", "r") as f:
-                        for email in f:
-                            if email[
-                                email.find("@") + 1 :
-                            ].rstrip() == domain and self.email_valid(email):
-                                # Add found domains and validate e-mail
-                                domain_st.add(email.rstrip())
-
-                else:
-                    # For files with csv extension
-                    with open(f"emails/{filename}", "r") as fb:
-                        reader = csv.DictReader(fb, delimiter=";")
-                        for row in reader:
-                            eml = row["email"]
-                            if eml[
-                                eml.find("@") + 1 :
-                            ].rstrip() == domain and self.email_valid(eml):
-                                # Add found domains and validate e-mail
-                                domain_st.add(eml.rstrip())
+        add_email = self.open_file()  # add email
+        for domain in sorted(set(self.email_list)):
+            for email in add_email:
+                if email[email.find("@") + 1 :].rstrip() == domain and self.email_valid(
+                    email
+                ):
+                    # Add found domains and validate e-mail
+                    domain_st.add(email.rstrip())
 
             # Domain and Quantity Output
             print(f"Domain {domain} ({len(domain_st)})")
@@ -175,24 +111,10 @@ class EmailDate:
     def all_emails(self):
         self.email_list.clear()  # Clearing the list before use
         # Get all files from emails directory
-        for filename in os.listdir("emails"):
-            # Define the extension
-            if pathlib.Path(filename).suffix == ".txt":
-                with open(f"emails/{filename}", "r") as f:
-                    for email in f:
-                        if self.email_valid(email.rstrip()):
-                            # Adding all valid e-mails
-                            self.email_list.append(email.rstrip())
-
-            else:
-                ## For files with csv extension
-                with open(f"emails/{filename}", "r") as fb:
-                    reader = csv.DictReader(fb, delimiter=";")
-                    for row in reader:
-                        eml = row["email"]
-                        if self.email_valid(eml.rstrip()):
-                            # Adding all valid e-mails(csv)
-                            self.email_list.append(eml.rstrip())
+        for email in self.open_file():
+            if self.email_valid(email.rstrip()):
+                # Adding all valid e-mails
+                self.email_list.append(email.rstrip())
 
         return set(self.email_list)
 
@@ -213,8 +135,24 @@ class EmailDate:
                 "For detailed information on this command, run: python emailoperations.py -feil --help"
             )
 
+    @staticmethod
+    def open_file():
+        lst = []
+        for filename in os.listdir("emails"):
+            # Define the extension
+            if pathlib.Path(filename).suffix == ".txt":
+                with open(f"emails/{filename}", "r") as f:
+                    for email in f:
+                        lst.append(email.rstrip())
+            else:
+                with open(f"emails/{filename}", "r") as fb:
+                    reader = csv.DictReader(fb, delimiter=";")
+                    for row in reader:
+                        lst.append(row["email"])
+        return lst
 
-a = EmailDate()
+
+a = EmailOperations()
 if __name__ == "__main__":
     fire.Fire(
         {  # Dictionary With commands to run the application
