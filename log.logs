@@ -1,0 +1,4 @@
+[2022-07-22 13:28:54,905] [INFO] => Functions get_email_text Exception first argument must be string or compiled pattern
+[2022-07-22 13:30:38,512] [INFO] => Functions get_email_text Exception: first argument must be string or compiled pattern
+[2022-07-22 13:31:21,180] [ERROR] => Functions get_email_text Exception: first argument must be string or compiled pattern
+[2022-07-22 13:49:06,840] [ERROR] => Functions get_email_text Exception: first argument must be string or compiled pattern

@@ -3,6 +3,14 @@ import fire
 import re
 import csv
 import pathlib
+import logging
+
+
+logging.basicConfig(
+    filename="log.logs",
+    format="[%(asctime)s] [%(levelname)s] => %(message)s",
+    level="INFO",
+)
 
 
 class EmailOperations:
@@ -17,14 +25,20 @@ class EmailOperations:
 
     # Function for displaying invalid emails
     def add_dir_emails(self):
-        self.email_list.clear()  # Clearing the list before use
+        try:
+            self.email_list.clear()  # Clearing the list before use
 
-        self.email_not_valid(self.open_file())
+            self.email_not_valid(self.open_file())
 
-        # Displaying the number of invalid emails
-        print(f"Invalid emails ({len(self.email_list)}):")
-        # Output of invalid emails
-        [print(f"\t{email}") for email in self.email_list]
+            # Displaying the number of invalid emails
+            print(f"Invalid emails ({len(self.email_list)}):")
+            # Output of invalid emails
+            [print(f"\t{email}") for email in self.email_list]
+        except Exception as exc:
+            logging.info("Function add_dir_emails Exceptin  %s", exc)
+            print(
+                "For detailed information on this command, run:python emailoperations.py -ic --help"
+            )
 
     # Function for searching letters by text
     def get_email_text(self, ltr):
@@ -46,6 +60,7 @@ class EmailOperations:
             print(
                 "For detailed information on this command, run: python emailoperations.py -s --help"
             )
+            logging.error("Functions get_email_text Exception: %s", exc)
 
     # Function for determining valid e-mails
     def email_valid(self, email):
@@ -106,6 +121,7 @@ class EmailOperations:
             return log_email
         except Exception as exc:
             print(exc)
+            logging.info("Function email_sent_log Exception: %s", exc)
 
     # Function to search all emails
     def all_emails(self):
@@ -130,10 +146,11 @@ class EmailOperations:
             print(f"Emails not sent ({len(result)}):")
             # Display e-mail in alphabetical order
             [print(f"\t{eml}") for eml in sorted(result)]
-        except Exception:
+        except Exception as exc:
             print(
                 "For detailed information on this command, run: python emailoperations.py -feil --help"
             )
+            logging.info("Function find_email_not_logs Exception: %s", exc)
 
     @staticmethod
     def open_file():
