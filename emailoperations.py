@@ -121,7 +121,7 @@ class EmailOperations:
             return log_email
         except Exception as exc:
             print(exc)
-            logging.info("Function email_sent_log Exception: %s", exc)
+            logging.error("Function email_sent_log Exception: %s", exc)
 
     # Function to search all emails
     def all_emails(self):
@@ -150,7 +150,7 @@ class EmailOperations:
             print(
                 "For detailed information on this command, run: python emailoperations.py -feil --help"
             )
-            logging.info("Function find_email_not_logs Exception: %s", exc)
+            logging.error("Function find_email_not_logs Exception: %s", exc)
 
     @staticmethod
     def open_file():
