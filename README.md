@@ -3,7 +3,7 @@
 # Script to work with email data
 
 ## Mounting
-> Installing pipenv
+Installing pipenv
 
 Ubuntu you can install pipenv
 
