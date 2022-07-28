@@ -60,7 +60,7 @@ class EmailOperations:
             print(
                 "For detailed information on this command, run: python emailoperations.py -s --help"
             )
-            logging.error("Functions get_email_text Exception: %s", exc)
+            logging.info("Functions get_email_text Exception: %s", exc)
 
     # Function for determining valid e-mails
     def email_valid(self, email):
@@ -121,7 +121,7 @@ class EmailOperations:
             return log_email
         except Exception as exc:
             print(exc)
-            logging.error("Function email_sent_log Exception: %s", exc)
+            logging.info("Function email_sent_log Exception: %s", exc)
 
     # Function to search all emails
     def all_emails(self):
@@ -150,7 +150,7 @@ class EmailOperations:
             print(
                 "For detailed information on this command, run: python emailoperations.py -feil --help"
             )
-            logging.error("Function find_email_not_logs Exception: %s", exc)
+            logging.info("Function find_email_not_logs Exception: %s", exc)
 
     @staticmethod
     def open_file():
